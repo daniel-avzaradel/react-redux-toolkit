@@ -36,3 +36,14 @@ export const PostsSection = styled.section`
     }
   }
 `
+
+export const PostArticle = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #a1a1a1;
+  padding: 4px;
+  background-color: #171717;
+  border-radius: 6px;
+`
