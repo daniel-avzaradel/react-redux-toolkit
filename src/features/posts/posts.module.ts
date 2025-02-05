@@ -57,7 +57,7 @@ export const PostArticle = styled.article`
   background-color: #171717;
   border-radius: 6px;
   min-width: 25%;
-  height: 15dvh;
+  height: 20dvh;
   & > p {
     font-size: clamp(12px, 1vw, 16px);
   }

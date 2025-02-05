@@ -87,6 +87,6 @@ const postsSlice = createSlice({
 
 export const selectAllPosts = (state: RootStore) => state.posts;
 
-export const { postAdded } = postsSlice.actions;
+export const { postAdded , reactionsAdded} = postsSlice.actions;
 
 export default postsSlice.reducer;
