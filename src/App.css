@@ -2,15 +2,9 @@
   max-width: 1280px;
   text-align: center;
   width: 100%;
-  margin: auto;
+  margin: 0 auto;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -28,7 +22,17 @@
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  gap: 1rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  & > * {
+    border: 1px solid #a1a1a1;
+    border-radius: 6px;
+    background-color: #21242b;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
