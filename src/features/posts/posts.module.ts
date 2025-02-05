@@ -37,13 +37,31 @@ export const PostsSection = styled.section`
   }
 `
 
+export const RenderedPosts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+`
+
 export const PostArticle = styled.article`
   display: flex;
+  flex-grow: 1;
+  flex-basis: 200px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 1px solid #a1a1a1;
-  padding: 4px;
+  box-sizing: border-box;
+  padding: 2rem;
   background-color: #171717;
   border-radius: 6px;
+  min-width: 25%;
+  height: 15dvh;
+  & > p {
+    font-size: clamp(12px, 1vw, 16px);
+  }
+  & > p, h2, h3 {
+    margin: 0;
+  }
 `
