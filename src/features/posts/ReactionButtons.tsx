@@ -20,7 +20,7 @@ const ReactionButtons = ({post}: ReactionButtonsProps) => {
 
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
     return (
-      <button style={{padding: '4px 6px'}} key={name} type='button'
+      <button style={{padding: '4px 8px'}} key={name} type='button'
       className='reactionButton'
       onClick={() => dispatch(reactionsAdded({postId: post.id, reaction: name}))}>
         {emoji} {post.reactions[name as keyof typeof post.reactions]}
