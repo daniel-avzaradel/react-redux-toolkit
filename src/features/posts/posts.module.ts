@@ -47,21 +47,26 @@ export const RenderedPosts = styled.div`
 export const PostArticle = styled.article`
   display: flex;
   flex-grow: 1;
-  flex-basis: 200px;
+  flex-basis: 280px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 1px solid #a1a1a1;
   box-sizing: border-box;
   padding: 2rem;
+  box-sizing: border-box;
   background-color: #171717;
   border-radius: 6px;
   min-width: 25%;
-  height: 20dvh;
+  height: 25dvh;
   & > p {
-    font-size: clamp(12px, 1vw, 16px);
+    font-size: clamp(14px, 1vw, 18px);
   }
   & > p, h2, h3 {
     margin: 0;
+  }
+  & > h3 {
+    font-size: clamp(18px, 1.2vw, 24px);
+    margin-bottom: 6px;
   }
 `

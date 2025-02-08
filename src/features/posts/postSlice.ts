@@ -8,6 +8,7 @@ const POST_URL = 'https://jsonplaceholder.typicode.com/posts';
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts", async () => {
     const response = await axios.get(POST_URL)
+    console.log(response.data);
     return [...response.data];
   }
 )
@@ -23,7 +24,7 @@ interface Reactions {
 export interface PostsState {
   id: string;
   title: string;
-  content: string;
+  body: string;
   date: string;
   reactions: Reactions;
   userId?: string;
@@ -49,12 +50,12 @@ const postsSlice = createSlice({
       reducer: (state, action: PayloadAction<PostsState>) => {
         state.posts.push(action.payload);
       },
-      prepare(title, content, userId) {
+      prepare(title, body, userId) {
         return {
           payload: {
             id: nanoid(),
             title,
-            content,
+            body,
             date: new Date().toISOString(),
             userId,
             reactions: {

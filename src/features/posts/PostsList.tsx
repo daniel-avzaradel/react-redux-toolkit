@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { PostArticle, PostsSection, RenderedPosts } from "./posts.module";
-import { selectAllPosts, selectError, selectStatus } from "./postSlice";
+import { PostsSection, RenderedPosts } from "./posts.module";
+import { fetchPosts, selectAllPosts, selectError, selectStatus } from "./postSlice";
 
-import TimeAgo from "./TimeAgo";
-import PostAuthor from "./PostAuthor";
-import ReactionButtons from "./ReactionButtons";
+import { useEffect } from "react";
 import { AppDispatch } from "../../app/store";
+import PostsExcerpt from "./PostsExcerpt";
 
 const PostsList = () => {
 
@@ -15,20 +14,16 @@ const PostsList = () => {
     const postStatus = useSelector(selectStatus);
     const error = useSelector(selectError);
 
+    useEffect(() => {
+        if(postStatus === 'idle') {
+            dispatch(fetchPosts())
+        }
+    }, [postStatus, dispatch])
+
     const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
 
-    const renderedPosts = orderedPosts.map(post => (
-        <PostArticle key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.content.substring(0, 120)}</p>
-            <br />
-            <p className="postCredit">
-                <PostAuthor userId={post.userId} />
-                <TimeAgo timestamp={post.date} />
-            </p>
-            <br />
-            <ReactionButtons post={post} />
-        </PostArticle>
+    const renderedPosts = orderedPosts.map((post, i) => (
+        <PostsExcerpt post={post} key={post.id + i} />
     ))
 
     return (
