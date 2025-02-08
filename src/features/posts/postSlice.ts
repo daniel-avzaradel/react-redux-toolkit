@@ -8,8 +8,14 @@ const POST_URL = 'https://jsonplaceholder.typicode.com/posts';
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts", async () => {
     const response = await axios.get(POST_URL)
-    console.log(response.data);
     return [...response.data];
+  }
+)
+
+export const addNewPost = createAsyncThunk(
+  "posts/addNewPost", async(initialPost) => {
+    const response = axios.post(POST_URL, initialPost)
+    return (await response).data;
   }
 )
 
@@ -27,7 +33,7 @@ export interface PostsState {
   body: string;
   date: string;
   reactions: Reactions;
-  userId?: string;
+  userId?: number;
 }
 
 export interface PostsApiState {
@@ -101,6 +107,18 @@ const postsSlice = createSlice({
     .addCase(fetchPosts.rejected, (state, action: PayloadAction<any>) => {
       state.status = 'failed';
       state.error = action.payload.message
+    })
+    .addCase(addNewPost.fulfilled, (state, action: PayloadAction<PostsState>) => {
+      action.payload.userId = Number(action.payload.userId);
+      action.payload.date = new Date().toISOString();
+      action.payload.reactions = {
+        thumbsUp: 0,
+        wow: 0,
+        heart: 0,
+        rocket: 0,
+        coffee: 0
+      }
+      state.posts.push(action.payload)
     })
   }
 });
