@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { RootStore } from "../../app/store";
-// import { sub } from "date-fns";
+import { sub } from "date-fns";
 import axios from "axios";
 
 const POST_URL = 'https://jsonplaceholder.typicode.com/posts';
@@ -32,7 +32,7 @@ export interface PostsState {
 export interface PostsApiState {
   posts: PostsState[],
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
-  error: Error | null
+  error: Error | null | string
 }
 
 const initialState: PostsApiState = {
@@ -75,10 +75,38 @@ const postsSlice = createSlice({
             existingPost.reactions[reaction as keyof typeof existingPost.reactions]++
         }
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchPosts.pending, (state) => {
+      state.status = 'loading';
+    })
+    .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<PostsApiState['posts']>) => {
+      state.status = 'succeeded';
+      let min = 1;
+      const loadedPosts = action.payload.map(post => {
+        post.date = sub(new Date(), {minutes: min++}).toISOString();
+        post.reactions = {
+          thumbsUp: 0,
+          wow: 0,
+          heart: 0,
+          rocket: 0,
+          coffee: 0
+        }
+        return post;
+      });
+
+      state.posts = state.posts.concat(loadedPosts)
+    })
+    .addCase(fetchPosts.rejected, (state, action: PayloadAction<any>) => {
+      state.status = 'failed';
+      state.error = action.payload.message
+    })
   }
 });
 
 export const selectAllPosts = (state: RootStore) => state.posts.posts;
+export const selectError = (state: RootStore) => state.posts.error;
+export const selectStatus = (state: RootStore) => state.posts.status;
 
 export const { postAdded , reactionsAdded} = postsSlice.actions;
 

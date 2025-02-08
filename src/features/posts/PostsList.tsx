@@ -1,13 +1,19 @@
-import { useSelector } from "react-redux";
-import PostAuthor from "./PostAuthor";
+import { useDispatch, useSelector } from "react-redux";
 import { PostArticle, PostsSection, RenderedPosts } from "./posts.module";
-import { selectAllPosts } from "./postSlice";
+import { selectAllPosts, selectError, selectStatus } from "./postSlice";
+
 import TimeAgo from "./TimeAgo";
+import PostAuthor from "./PostAuthor";
 import ReactionButtons from "./ReactionButtons";
+import { AppDispatch } from "../../app/store";
 
 const PostsList = () => {
 
-    const posts = useSelector(selectAllPosts)
+    const dispatch = useDispatch<AppDispatch>();
+
+    const posts = useSelector(selectAllPosts);
+    const postStatus = useSelector(selectStatus);
+    const error = useSelector(selectError);
 
     const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
 
