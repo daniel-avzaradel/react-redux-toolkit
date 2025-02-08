@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { PostsSection, RenderedPosts } from "./posts.module";
-import { fetchPosts, selectAllPosts, selectError, selectStatus } from "./postSlice";
+import { fetchPosts, selectAllPosts, selectStatus } from "./postSlice";
 
 import { useEffect } from "react";
 import { AppDispatch } from "../../app/store";
@@ -12,7 +12,6 @@ const PostsList = () => {
 
     const posts = useSelector(selectAllPosts);
     const postStatus = useSelector(selectStatus);
-    const error = useSelector(selectError);
 
     useEffect(() => {
         if(postStatus === 'idle') {
