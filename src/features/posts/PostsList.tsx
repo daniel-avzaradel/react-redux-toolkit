@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PostsSection, RenderedPosts } from "./posts.module";
 import { fetchPosts, selectAllPosts, selectStatus } from "./postSlice";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { AppDispatch } from "../../app/store";
 import PostsExcerpt from "./PostsExcerpt";
 
@@ -12,9 +12,11 @@ const PostsList = () => {
 
     const posts = useSelector(selectAllPosts);
     const postStatus = useSelector(selectStatus);
+    const didFetch = useRef(false); // Track if we already fetched
 
     useEffect(() => {
-        if(postStatus === 'idle') {
+        if(postStatus === 'idle' && !didFetch.current) {
+            didFetch.current = true;
             dispatch(fetchPosts())
         }
     }, [postStatus, dispatch])
