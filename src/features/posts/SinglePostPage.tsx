@@ -4,12 +4,17 @@ import { RootStore } from "../../app/store"
 import PostAuthor from "./PostAuthor"
 import TimeAgo from "./TimeAgo"
 import ReactionButtons from "./ReactionButtons"
+import { useParams } from "react-router-dom"
+import { SinglePageArticle } from "./posts.module"
 
 const SinglePostPage = () => {
 
+  const { postId } = useParams()
   // retrieve postId
 
-  const post = useSelector((state: RootStore) => selectPostById(state, ''))
+  const post = useSelector((state: RootStore) => selectPostById(state, postId ?? '1'))
+  console.log(post);
+  
 
   if(!post) {
     return (
@@ -20,7 +25,8 @@ const SinglePostPage = () => {
   }
 
   return(
-    <article>
+    <SinglePageArticle>
+      <div>
       <h2>{post.title}</h2>
       <p>{post.body}</p>
       <p className="postCredit">
@@ -28,7 +34,8 @@ const SinglePostPage = () => {
         <TimeAgo timestamp={post.date} />
       </p>
       <ReactionButtons post={post} />
-    </article>
+      </div>
+    </SinglePageArticle>
   )
 }
 

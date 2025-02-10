@@ -28,7 +28,7 @@ interface Reactions {
 }
 
 export interface PostsState {
-  id: string;
+  id: number;
   title: string;
   body: string;
   date: string;
@@ -59,7 +59,7 @@ const postsSlice = createSlice({
       prepare(title, body, userId) {
         return {
           payload: {
-            id: nanoid(),
+            id: Number(nanoid()),
             title,
             body,
             date: new Date().toISOString(),
@@ -77,7 +77,7 @@ const postsSlice = createSlice({
     },
     reactionsAdded: (state, action: PayloadAction<{postId: string, reaction: string}>) => {
         const { postId, reaction } = action.payload
-        const existingPost = state.posts.find((post: PostsState)  => post.id === postId)
+        const existingPost = state.posts.find((post: PostsState)  => post.id === Number(postId))
         if(existingPost && existingPost.reactions && reaction in existingPost.reactions) {
             existingPost.reactions[reaction as keyof typeof existingPost.reactions]++
         }
@@ -128,7 +128,7 @@ export const selectError = (state: RootStore) => state.posts.error;
 export const selectStatus = (state: RootStore) => state.posts.status;
 
 export const selectPostById = (state: RootStore, postId: string) => {
-  return state.posts.posts.find(post => post.id === postId)
+  return state.posts.posts.find(post => post.id === Number(postId))
 }
 
 export const { postAdded , reactionsAdded} = postsSlice.actions;

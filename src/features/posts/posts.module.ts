@@ -44,6 +44,21 @@ export const RenderedPosts = styled.div`
   height: 100%;
 `
 
+export const SinglePageArticle = styled.article`
+  display: flex;
+  width: clamp(50vw, 500px, 90vw);
+  margin: auto;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`
+
 export const PostArticle = styled.article`
   display: flex;
   flex-grow: 1;
