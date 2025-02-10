@@ -127,6 +127,10 @@ export const selectAllPosts = (state: RootStore) => state.posts.posts;
 export const selectError = (state: RootStore) => state.posts.error;
 export const selectStatus = (state: RootStore) => state.posts.status;
 
+export const selectPostById = (state: RootStore, postId: string) => {
+  state.posts.posts.find(post => post.id === postId)
+}
+
 export const { postAdded , reactionsAdded} = postsSlice.actions;
 
 export default postsSlice.reducer;
