@@ -46,7 +46,7 @@ export const RenderedPosts = styled.div`
 
 export const SinglePageArticle = styled.article`
   display: flex;
-  width: clamp(50vw, 500px, 90vw);
+  width: clamp(50vw, 400px, 90vw);
   margin: auto;
   flex-grow: 1;
   align-items: center;
