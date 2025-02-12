@@ -68,7 +68,7 @@ export const PostArticle = styled.article`
   justify-content: center;
   border: 1px solid #a1a1a1;
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 2rem;
   box-sizing: border-box;
   background-color: #171717;
   border-radius: 6px;
