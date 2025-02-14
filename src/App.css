@@ -3,6 +3,11 @@
   text-align: center;
   width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll
 }
 
 .logo:hover {
@@ -24,13 +29,13 @@
 .App {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
   gap: 1rem;
   margin: 0 auto;
   box-sizing: border-box;
   & > * {
-    border: 1px solid #a1a1a1;
-    border-radius: 6px;
     background-color: #21242b;
   }
 }

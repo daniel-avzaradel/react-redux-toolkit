@@ -13,8 +13,6 @@ const SinglePostPage = () => {
   // retrieve postId
 
   const post = useSelector((state: RootStore) => selectPostById(state, postId ?? '1'))
-  console.log(post);
-  
 
   if(!post) {
     return (

@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const PostsSection = styled.section`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border-radius: 4px;
   padding: 2rem;
   width: 100%;
@@ -46,7 +44,8 @@ export const RenderedPosts = styled.div`
 
 export const SinglePageArticle = styled.article`
   display: flex;
-  width: clamp(50vw, 500px, 90vw);
+  width: 100%;
+  box-sizing: border-box;
   margin: auto;
   flex-grow: 1;
   align-items: center;
@@ -66,7 +65,6 @@ export const PostArticle = styled.article`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid #a1a1a1;
   box-sizing: border-box;
   padding: 2rem;
   box-sizing: border-box;
