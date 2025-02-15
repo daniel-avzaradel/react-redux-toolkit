@@ -2,7 +2,7 @@ import { useState } from "react";
  
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom"
-import { PostsApiState, selectPostById, updatePost } from "./postSlice";
+import { PostsApiState, PostsState, selectPostById, updatePost } from "./postSlice";
 import { AppDispatch, RootStore } from "../../app/store";
 import { selectAllUsers } from "../users/usersSlice";
 import { EditBtns, PostsSection } from "./posts.module";
@@ -12,12 +12,12 @@ const EditPostForm = () => {
   const { postId } = useParams<{ postId: string }>();
   const navigate = useNavigate();
 
-  const post = useSelector((state: RootStore) => postId && selectPostById(state, postId));
+  const post: PostsState | undefined = useSelector((state: RootStore) => postId ? selectPostById(state, postId) : undefined);
   const users = useSelector(selectAllUsers)
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [userId, setUserId] = useState<number | undefined>(undefined);
+  const [title, setTitle] = useState(post?.title);
+  const [content, setContent] = useState(post?.body);
+  const [userId, setUserId] = useState<number | undefined>(post?.userId);
   const [addRequestStatus, setAddRequestStatus] = useState<PostsApiState['status']>("idle");
 
   const dispatch = useDispatch<AppDispatch>();
