@@ -40,16 +40,17 @@ const EditPostForm = () => {
       )
     }
     
-    const onSavePostClicked = () => {
+    const onSavePostClicked = async() => {
       if(canSave) {
         try {
           setAddRequestStatus('loading');
-          dispatch(updatePost({ id: post.id, title, body: content, userId, reactions: post.reactions })).unwrap()
+          await dispatch(updatePost({ id: post.id, title, body: content, userId, reactions: post.reactions })).unwrap()
 
           setTitle("");
           setContent("");
           setUserId(undefined)
           navigate(`/post/${postId}`)
+
         } catch (error) {
           console.error('Filed to save the post', error)
         } finally {
