@@ -1,11 +1,12 @@
 import { useState } from "react";
  
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom"
-import { PostsApiState, PostsState, selectPostById, updatePost } from "./postSlice";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppDispatch, RootStore } from "../../app/store";
 import { selectAllUsers } from "../users/usersSlice";
-import { EditBtns, PostsSection } from "./posts.module";
+import { EditPostsSection } from "./EditPost.module";
+import { EditBtns } from "./posts.module";
+import { PostsApiState, PostsState, selectPostById, updatePost } from "./postSlice";
 
 const EditPostForm = () => {
 
@@ -65,7 +66,7 @@ const EditPostForm = () => {
     ))
 
     return (
-      <PostsSection>
+      <EditPostsSection>
           <h2>Edit Post</h2>
           <form>
               <label htmlFor="postTitle">Post Title:</label>
@@ -83,6 +84,7 @@ const EditPostForm = () => {
               </select>
               <label htmlFor="postContent">Content:</label>
               <textarea
+                  rows={5}
                   id="postContent"
                   name="postContent"
                   value={content}
@@ -104,7 +106,7 @@ const EditPostForm = () => {
               </button>
               </EditBtns>
           </form>
-      </PostsSection>
+      </EditPostsSection>
   )
 }
 

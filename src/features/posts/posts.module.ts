@@ -33,6 +33,14 @@ export const PostsSection = styled.section`
       resize: none;
     }
   }
+  & > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+  }
 `
 
 export const EditBtns = styled.div`
