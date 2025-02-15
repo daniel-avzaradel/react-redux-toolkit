@@ -22,8 +22,6 @@ const PostsList = () => {
     }, [postStatus, dispatch])
 
     const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
-    console.log(orderedPosts);
-    
 
     const renderedPosts = orderedPosts.map((post, i) => (
         <PostsExcerpt post={post} key={post.id + i} />

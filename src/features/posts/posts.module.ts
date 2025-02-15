@@ -35,6 +35,11 @@ export const PostsSection = styled.section`
   }
 `
 
+export const EditBtns = styled.div`
+  display: flex;
+  gap: 1rem;
+`
+
 export const RenderedPosts = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -55,6 +60,7 @@ export const SinglePageArticle = styled.article`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 80%;
   }
 `
 
